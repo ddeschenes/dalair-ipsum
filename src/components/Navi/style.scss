@@ -1,0 +1,8 @@
+@import 'scss/colors.scss';
+@import 'scss/fonts.scss';
+
+.navbar-dark {
+  .navbar-brand {
+    color: $black;
+  }
+}
