@@ -54,7 +54,7 @@ export const pageQuery = graphql`
             date(formatString: "YYYY/MM/DD")
             image {
               childImageSharp {
-                fixed(width: 500) {
+                fixed(width: 500, quality: 100) {
                   ...GatsbyImageSharpFixed_withWebp
                 }
               }

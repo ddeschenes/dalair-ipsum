@@ -3,6 +3,7 @@
 
 .navbar-dark {
   .navbar-brand {
-    color: $black;
+    color: $black !important;
+    font-size: 2rem;
   }
 }

@@ -1,10 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: 'Wknd',
-    description: 'Gatsby starter for bootstrap a blog',
-    siteUrl: 'https://gatstrap.netlify.com',
-    author: 'jaxx2104',
-    twitter: 'jaxx2104',
+    title: 'dalair ipsum',
+    description: 'Matin Dalair et ses citations',
+    siteUrl: 'https://dalairipsum.ca',
+    author: 'ddeschenes',
+    twitter: '',
     adsense: '',
   },
   pathPrefix: '/',
