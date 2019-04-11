@@ -3,7 +3,7 @@ title: 'Martin Dalair'
 date: '2018-04-01T22:12:03.284Z'
 layout: post
 path: '/martin-dalair/'
-image: ./dalair-vintage-1.jpg
+image: ./dalair-2.jpg
 description: 'Johannes Gensfleisch zur Laden zum Gutenberg (c. 1398 – 1468) was a German blacksmith, goldsmith, printer, and publisher who introduced printing to Europe.'
 category: Typography
 tags:
