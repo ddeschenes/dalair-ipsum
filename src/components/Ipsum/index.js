@@ -57,7 +57,7 @@ export class IpsumGenerator {
 
   makeSentence() {
     let sentence = ''
-    const nbWords = random(8, 14)
+    const nbWords = random(6, 10)
     for (let i = 0; i < nbWords; i++) {
       const word = this.chooseWord()
       sentence += ` ${word}`
@@ -68,12 +68,12 @@ export class IpsumGenerator {
   makeParagraph(nbParagraphs = 1) {
     let paragraphes = []
     for (let i = 0; i < nbParagraphs; i++) {
-      const nbSentences = random(3, 8)
-      let sentence = ''
+      const nbSentences = random(3, 7)
+      let sentences = ''
       for (let i = 0; i < nbSentences; i++) {
-        sentence += `${this.makeSentence()}.`
+        sentences += `${this.makeSentence().trim()} `
       }
-      paragraphes.push(<p>{sentence}.</p>)
+      paragraphes.push(<p>{sentences}</p>)
     }
     return <blockquote>{paragraphes}</blockquote>
   }
