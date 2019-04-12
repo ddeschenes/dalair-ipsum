@@ -16,7 +16,12 @@ export class Ipsum extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { dalairOnly: false, nbParagraphes: 0, submitted: false }
+    this.state = {
+      dalairOnly: false,
+      nbParagraphes: 0,
+      submitted: false,
+      previous: <div />,
+    }
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -65,6 +70,9 @@ export class Ipsum extends Component {
                             <input
                               type="number"
                               className="form-control"
+                              max="99"
+                              min="1"
+                              maxLength="2"
                               id="input-paragraph"
                               placeholder="Entre ton nombre de paragraphes"
                               value={this.state.nbParagraphes}
@@ -96,11 +104,16 @@ export class Ipsum extends Component {
                     </div>
                     {this.state.submitted && (
                       <div className="mt-3 mb-3">
-                        {this.ipsumGenerator.generate(
-                          this.customWords,
-                          this.state.nbParagraphes
-                        )}
+                        {
+                          (this.previous = this.ipsumGenerator.generate(
+                            this.customWords,
+                            this.state.nbParagraphes
+                          ))
+                        }
                       </div>
+                    )}
+                    {!this.state.submitted && (
+                      <div className="mt-3 mb-3">{this.previous}</div>
                     )}
                   </div>
                 </div>
