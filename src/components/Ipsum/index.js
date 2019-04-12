@@ -11,8 +11,7 @@ const Ipsum = () => {
   const custom = get(allDataJson, 'edges[0].node.custom')
   const base = get(allDataJson, 'edges[0].node.default')
 
-  const generator = new IpsumGenerator(merge(base, custom))
-  console.log(generator.makeParagraph(5))
+  const generator = new IpsumGenerator(merge(base.slice(base.length), custom))
 
   return (
     <div>
@@ -23,7 +22,7 @@ const Ipsum = () => {
           </div>
           <div className="content">
             <Img fixed={file.childImageSharp.fixed} />
-            <div className="mt-3 mb-3">{generator.makeParagraph(100)}</div>
+            <div className="mt-3 mb-3">{generator.makeParagraph(5)}</div>
           </div>
         </div>
       </div>
@@ -58,7 +57,7 @@ export class IpsumGenerator {
 
   makeSentence() {
     let sentence = ''
-    const nbWords = random(8, 20)
+    const nbWords = random(8, 14)
     for (let i = 0; i < nbWords; i++) {
       const word = this.chooseWord()
       sentence += ` ${word}`
@@ -67,13 +66,16 @@ export class IpsumGenerator {
   }
 
   makeParagraph(nbParagraphs = 1) {
-    let paragraph = []
-
+    let paragraphes = []
     for (let i = 0; i < nbParagraphs; i++) {
-      const sentence = this.makeSentence()
-      paragraph.push(<p>{sentence}.</p>)
+      const nbSentences = random(3, 8)
+      let sentence = ''
+      for (let i = 0; i < nbSentences; i++) {
+        sentence += `${this.makeSentence()}.`
+      }
+      paragraphes.push(<p>{sentence}.</p>)
     }
-    return <blockquote>{paragraph}</blockquote>
+    return <blockquote>{paragraphes}</blockquote>
   }
 
   chooseWord() {
