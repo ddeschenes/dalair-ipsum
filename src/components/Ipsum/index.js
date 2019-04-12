@@ -26,14 +26,14 @@ const Ipsum = () => {
             </h2>
           </div>
           <div className="content">
-            <div class="row">
-              <div class="col">
+            <div className="row">
+              <div className="col">
                 <Img fixed={file.childImageSharp.fixed} />
               </div>
-              <div class="col align-self-center section-ipsum">
+              <div className="col align-self-center section-ipsum">
                 <form>
                   <div className="form-group">
-                    <label for="input-paragraph">Paragraphes</label>
+                    <label htmlFor="input-paragraph">Paragraphes</label>
                     <input
                       type="number"
                       className="form-control"
@@ -47,7 +47,7 @@ const Ipsum = () => {
                       className="form-check-input"
                       id="check-dalair"
                     />
-                    <label className="form-check-label" for="check-dalair">
+                    <label className="form-check-label" htmlFor="check-dalair">
                       Dalair seulement
                     </label>
                   </div>
