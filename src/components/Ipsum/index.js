@@ -18,7 +18,10 @@ const Ipsum = () => {
       <div className="article">
         <div className="container">
           <div className="info">
-            <h1>dalair ipsum</h1>
+            <h2>
+              Mettez du Dalair dans votre lorem ipsum et essayez notre
+              générateur !
+            </h2>
           </div>
           <div className="content">
             <Img fixed={file.childImageSharp.fixed} />
@@ -70,10 +73,10 @@ export class IpsumGenerator {
     for (let i = 0; i < nbParagraphs; i++) {
       const nbSentences = random(3, 7)
       let sentences = ''
-      for (let i = 0; i < nbSentences; i++) {
+      for (let j = 0; j < nbSentences; j++) {
         sentences += `${this.makeSentence().trim()} `
       }
-      paragraphes.push(<p>{sentences}</p>)
+      paragraphes.push(<p key={i}>{sentences}</p>)
     }
     return <blockquote>{paragraphes}</blockquote>
   }
