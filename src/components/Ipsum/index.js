@@ -1,5 +1,5 @@
-import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import React, { Component } from 'react'
+import { graphql, StaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
 import random from 'lodash/random'
 import shuffle from 'lodash/shuffle'
@@ -8,62 +8,109 @@ import get from 'lodash/get'
 
 import './style.scss'
 
-const Ipsum = () => {
-  const { file, allDataJson } = useStaticQuery(queryIpsum)
-  const custom = get(allDataJson, 'edges[0].node.custom')
-  const base = get(allDataJson, 'edges[0].node.default')
+export class Ipsum extends Component {
+  ipsumGenerator = new IpsumGenerator()
+  customWords = []
+  baseWords = []
 
-  const generator = new IpsumGenerator(merge(base.slice(base.length), custom))
+  constructor(props) {
+    super(props)
 
-  return (
-    <div>
-      <div className="article">
-        <div className="container">
-          <div className="info">
-            <h2>
-              Mettez du Dalair dans votre lorem ipsum et essayez notre
-              générateur !
-            </h2>
-          </div>
-          <div className="content">
-            <div className="row">
-              <div className="col">
-                <Img fixed={file.childImageSharp.fixed} />
-              </div>
-              <div className="col align-self-center section-ipsum">
-                <form>
-                  <div className="form-group">
-                    <label htmlFor="input-paragraph">Paragraphes</label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="input-paragraph"
-                      placeholder="Entre ton nombre de paragraphes"
-                    />
+    this.state = { dalairOnly: false, nbParagraphes: 0, submitted: false }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(event) {
+    this.setState({ submitted: false, nbParagraphes: event.target.value })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.setState({ submitted: true })
+  }
+
+  render() {
+    return (
+      <StaticQuery
+        query={queryIpsum}
+        render={data => {
+          const { file, allDataJson } = data
+          this.customWords = get(allDataJson, 'edges[0].node.custom')
+          this.baseWords = get(allDataJson, 'edges[0].node.default')
+          return (
+            <div>
+              <div className="article">
+                <div className="container">
+                  <div className="info">
+                    <h2>
+                      Mettez du Dalair dans votre lorem ipsum et essayez notre
+                      générateur !
+                    </h2>
                   </div>
-                  <div className="form-check pt-2 pb-2">
-                    <input
-                      type="checkbox"
-                      className="form-check-input"
-                      id="check-dalair"
-                    />
-                    <label className="form-check-label" htmlFor="check-dalair">
-                      Dalair seulement
-                    </label>
+                  <div className="content">
+                    <div className="row">
+                      <div className="col">
+                        <Img fixed={file.childImageSharp.fixed} />
+                      </div>
+                      <div className="col align-self-center section-ipsum">
+                        <form onSubmit={this.handleSubmit}>
+                          <i>
+                            Yes sir Miller&nbsp;! V'là un lorem ipsum à mon
+                            image&nbsp;! Essayes-le&nbsp;!
+                          </i>
+                          <div className="form-group pt-3">
+                            <label htmlFor="input-paragraph">Paragraphes</label>
+                            <input
+                              type="number"
+                              className="form-control"
+                              id="input-paragraph"
+                              placeholder="Entre ton nombre de paragraphes"
+                              value={this.state.nbParagraphes}
+                              onChange={this.handleChange}
+                            />
+                          </div>
+                          <div className="form-check pt-2 pb-2">
+                            <input
+                              type="checkbox"
+                              className="form-check-input"
+                              id="check-dalair"
+                              value={this.state.dalairOnly}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="check-dalair"
+                            >
+                              Dalair seulement
+                            </label>
+                          </div>
+                          <button
+                            type="submit"
+                            className="btn btn-primary mt-2"
+                          >
+                            Dalair Ipsum
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                    {this.state.submitted && (
+                      <div className="mt-3 mb-3">
+                        {this.ipsumGenerator.generate(
+                          this.customWords,
+                          this.state.nbParagraphes
+                        )}
+                      </div>
+                    )}
                   </div>
-                  <button type="submit" className="btn btn-primary mt-2">
-                    Dalair Ipsum
-                  </button>
-                </form>
+                </div>
               </div>
             </div>
-
-            <div className="mt-3 mb-3">{generator.makeParagraph(5)}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+          )
+        }}
+      />
+    )
+  }
 }
 
 export const queryIpsum = graphql`
@@ -89,6 +136,11 @@ export class IpsumGenerator {
   words = []
   constructor(words = []) {
     this.words = shuffle(words)
+  }
+
+  generate(words = [], nbParagraphes) {
+    this.words = shuffle(words)
+    return this.makeParagraph(nbParagraphes)
   }
 
   makeSentence() {
