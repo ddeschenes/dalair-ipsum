@@ -6,6 +6,8 @@ import shuffle from 'lodash/shuffle'
 import merge from 'lodash/merge'
 import get from 'lodash/get'
 
+import './style.scss'
+
 const Ipsum = () => {
   const { file, allDataJson } = useStaticQuery(queryIpsum)
   const custom = get(allDataJson, 'edges[0].node.custom')
@@ -24,7 +26,38 @@ const Ipsum = () => {
             </h2>
           </div>
           <div className="content">
-            <Img fixed={file.childImageSharp.fixed} />
+            <div class="row">
+              <div class="col">
+                <Img fixed={file.childImageSharp.fixed} />
+              </div>
+              <div class="col align-self-center section-ipsum">
+                <form>
+                  <div className="form-group">
+                    <label for="input-paragraph">Paragraphes</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="input-paragraph"
+                      placeholder="Entre ton nombre de paragraphes"
+                    />
+                  </div>
+                  <div className="form-check pt-2 pb-2">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="check-dalair"
+                    />
+                    <label className="form-check-label" for="check-dalair">
+                      Dalair seulement
+                    </label>
+                  </div>
+                  <button type="submit" className="btn btn-primary mt-2">
+                    Dalair Ipsum
+                  </button>
+                </form>
+              </div>
+            </div>
+
             <div className="mt-3 mb-3">{generator.makeParagraph(5)}</div>
           </div>
         </div>
@@ -35,7 +68,7 @@ const Ipsum = () => {
 
 export const queryIpsum = graphql`
   query IpsumQuery {
-    file(relativePath: { eq: "dalair-2.jpg" }) {
+    file(relativePath: { eq: "dalair-square.jpg" }) {
       childImageSharp {
         fixed(quality: 100) {
           ...GatsbyImageSharpFixed

@@ -1,0 +1,15 @@
+@import 'scss/colors.scss';
+@import 'scss/fonts.scss';
+
+.article {
+  .gatsby-image-wrapper {
+    border-radius: 50%;
+    border: solid 2px $gray-600;
+  }
+}
+
+.section-ipsum {
+  padding: 2rem;
+  border-radius: 5%;
+  border: solid 2px $gray-600;
+}

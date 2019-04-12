@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'dalair ipsum',
+    title: 'Dalair Ipsum',
     description: 'Matin Dalair et ses citations',
     siteUrl: 'https://dalairipsum.ca',
     author: 'ddeschenes',
