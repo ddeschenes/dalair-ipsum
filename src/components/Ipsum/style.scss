@@ -5,11 +5,13 @@
   .gatsby-image-wrapper {
     border-radius: 50%;
     border: solid 2px $gray-600;
+    text-align: center;
+    display: block !important;
+    margin: 0 auto;
   }
 }
 
 .section-ipsum {
-  padding: 2rem;
   border-radius: 5%;
   border: solid 2px $gray-600;
 }

@@ -19,7 +19,7 @@ export class Ipsum extends Component {
 
     this.state = {
       dalairOnly: true,
-      nbParagraphes: '',
+      nbParagraphes: 5,
       submitted: false,
       previous: <div />,
     }
@@ -68,11 +68,11 @@ export class Ipsum extends Component {
                     </h2>
                   </div>
                   <div className="content">
-                    <div className="row">
-                      <div className="col">
+                    <div className="row mx-auto">
+                      <div className="col mb-3 px-3">
                         <Img fixed={file.childImageSharp.fixed} />
                       </div>
-                      <div className="col align-self-center section-ipsum">
+                      <div className="col mb-3 align-self-center section-ipsum p-4">
                         {this.showForm()}
                       </div>
                     </div>
