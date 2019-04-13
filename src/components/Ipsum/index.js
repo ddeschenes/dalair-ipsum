@@ -162,6 +162,7 @@ export const queryIpsum = graphql`
   }
 `
 export class IpsumGenerator {
+  PONCTUATIONS = ['!', '.', '?', ';']
   words = []
   constructor(words = []) {
     this.words = shuffle(words)
@@ -179,7 +180,14 @@ export class IpsumGenerator {
       const word = this.chooseWord()
       sentence += ` ${word}`
     }
-    return `${sentence.trim()}.`
+    return this.appendEol(sentence)
+  }
+
+  appendEol(sentence) {
+    const eol = this.PONCTUATIONS.some(punctuation =>
+      sentence.endsWith(punctuation)
+    )
+    return eol ? sentence.trim() : `${sentence.trim()}.`
   }
 
   makeParagraph(nbParagraphs = 1) {
