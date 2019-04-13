@@ -12,26 +12,36 @@ export class Ipsum extends Component {
   ipsumGenerator = new IpsumGenerator()
   customWords = []
   baseWords = []
+  words = []
 
   constructor(props) {
     super(props)
 
     this.state = {
-      dalairOnly: false,
-      nbParagraphes: 0,
+      dalairOnly: true,
+      nbParagraphes: '',
       submitted: false,
       previous: <div />,
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleParagraphChange = this.handleParagraphChange.bind(this)
+    this.handleDalairOnlyChange = this.handleDalairOnlyChange.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
-  handleChange(event) {
+  handleParagraphChange(event) {
     this.setState({ submitted: false, nbParagraphes: event.target.value })
   }
 
-  handleSubmit(event) {
+  handleDalairOnlyChange(event) {
+    const checked = event.target.checked
+    this.setState({ submitted: false, dalairOnly: checked })
+    this.words = checked
+      ? this.customWords.slice()
+      : this.customWords.concat(this.baseWords)
+  }
+
+  handleFormSubmit(event) {
     event.preventDefault()
     this.setState({ submitted: true })
   }
@@ -44,13 +54,16 @@ export class Ipsum extends Component {
           const { file, allDataJson } = data
           this.customWords = get(allDataJson, 'edges[0].node.custom')
           this.baseWords = get(allDataJson, 'edges[0].node.default')
+          this.words = this.state.dalairOnly
+            ? this.customWords.slice()
+            : this.customWords.concat(this.baseWords)
           return (
             <div>
               <div className="article">
                 <div className="container">
                   <div className="info">
                     <h2>
-                      Mettez du Dalair dans votre lorem ipsum et essayez notre
+                      Mets du Dalair dans ton lorem ipsum et essayes le
                       générateur !
                     </h2>
                   </div>
@@ -60,61 +73,10 @@ export class Ipsum extends Component {
                         <Img fixed={file.childImageSharp.fixed} />
                       </div>
                       <div className="col align-self-center section-ipsum">
-                        <form onSubmit={this.handleSubmit}>
-                          <i>
-                            Yes sir Miller&nbsp;! V'là un lorem ipsum à mon
-                            image&nbsp;! Essayes-le&nbsp;!
-                          </i>
-                          <div className="form-group pt-3">
-                            <label htmlFor="input-paragraph">Paragraphes</label>
-                            <input
-                              type="number"
-                              className="form-control"
-                              max="99"
-                              min="1"
-                              maxLength="2"
-                              id="input-paragraph"
-                              placeholder="Entre ton nombre de paragraphes"
-                              value={this.state.nbParagraphes}
-                              onChange={this.handleChange}
-                            />
-                          </div>
-                          <div className="form-check pt-2 pb-2">
-                            <input
-                              type="checkbox"
-                              className="form-check-input"
-                              id="check-dalair"
-                              value={this.state.dalairOnly}
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="check-dalair"
-                            >
-                              Dalair seulement
-                            </label>
-                          </div>
-                          <button
-                            type="submit"
-                            className="btn btn-primary mt-2"
-                          >
-                            Dalair Ipsum
-                          </button>
-                        </form>
+                        {this.showForm()}
                       </div>
                     </div>
-                    {this.state.submitted && (
-                      <div className="mt-3 mb-3">
-                        {
-                          (this.previous = this.ipsumGenerator.generate(
-                            this.customWords,
-                            this.state.nbParagraphes
-                          ))
-                        }
-                      </div>
-                    )}
-                    {!this.state.submitted && (
-                      <div className="mt-3 mb-3">{this.previous}</div>
-                    )}
+                    {this.showIpsum()}
                   </div>
                 </div>
               </div>
@@ -122,6 +84,60 @@ export class Ipsum extends Component {
           )
         }}
       />
+    )
+  }
+  showForm() {
+    return (
+      <form onSubmit={this.handleFormSubmit}>
+        <i>
+          Yes sir Miller&nbsp;! V'là un lorem ipsum à mon image&nbsp;!
+          Essayes-le&nbsp;!
+        </i>
+        <div className="form-group pt-3">
+          <label htmlFor="input-paragraph">Paragraphes</label>
+          <input
+            type="number"
+            className="form-control"
+            max="99"
+            min="1"
+            maxLength="2"
+            required="{true}"
+            id="input-paragraph"
+            placeholder="Entre ton nombre de paragraphes"
+            value={this.state.nbParagraphes}
+            onChange={this.handleParagraphChange}
+          />
+        </div>
+        <div className="form-check pt-2 pb-2">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="check-dalair"
+            checked={this.state.dalairOnly}
+            onChange={this.handleDalairOnlyChange}
+          />
+          <label className="form-check-label" htmlFor="check-dalair">
+            Dalair seulement
+          </label>
+        </div>
+        <button type="submit" className="btn btn-primary mt-2">
+          Dalair Ipsum
+        </button>
+      </form>
+    )
+  }
+  showIpsum() {
+    return (
+      (this.state.submitted && (
+        <div className="mt-3 mb-3">
+          {
+            (this.previous = this.ipsumGenerator.generate(
+              this.words,
+              this.state.nbParagraphes
+            ))
+          }
+        </div>
+      )) || <div className="mt-3 mb-3">{this.previous}</div>
     )
   }
 }
