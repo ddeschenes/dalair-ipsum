@@ -227,7 +227,7 @@ export const ButtonClipboard = props => {
 
   return (
     <Fragment>
-      {document.queryCommandSupported('copy') && (
+      {
         <button className="btn btn-clipboard" onClick={copyToClipboard}>
           <img
             className="clippy"
@@ -236,7 +236,7 @@ export const ButtonClipboard = props => {
             alt="Copier"
           />
         </button>
-      )}
+      }
       <textarea
         style={{
           width: 0,
