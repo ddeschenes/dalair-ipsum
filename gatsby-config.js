@@ -57,10 +57,10 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Gatstrap',
-        short_name: 'Gatstrap',
-        description: 'Gatsby starter for bootstrap a blog',
-        homepage_url: 'https://gatstrap.netlify.com',
+        name: 'Dalair Ipsum',
+        short_name: 'Dalair Ipsum',
+        description: 'Du lorem ipsum, sauce Martin Dalair',
+        homepage_url: 'https://www.dalairipsum.ca',
         start_url: '/',
         background_color: '#fff',
         theme_color: '#673ab7',

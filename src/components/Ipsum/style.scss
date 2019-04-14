@@ -1,6 +1,15 @@
 @import 'scss/colors.scss';
 @import 'scss/fonts.scss';
 
+.btn-secondary {
+  background-color: $white;
+  color: $black;
+  &:hover {
+    background-color: $gray-100;
+    color: $black;
+  }
+}
+
 section {
   min-height: calc(100vh - 9rem);
   padding-top: 2rem;
@@ -13,11 +22,6 @@ section {
       display: block !important;
       margin: 0 auto;
     }
-  }
-
-  .section-ipsum {
-    border-radius: 5%;
-    border: solid 2px $gray-600;
   }
 
   #section-ipsum {
@@ -41,8 +45,8 @@ section {
     &:hover {
       opacity: 1;
       text-decoration: none;
-      background-color: #ffe600;
-      background-image: linear-gradient(#fae843, $yellow);
+      background-color: $gray-600;
+      background-image: linear-gradient($gray-200, $gray-600);
       border-color: #ccc;
     }
 
@@ -51,6 +55,44 @@ section {
       position: relative;
       top: 3px;
       padding: 0;
+    }
+  }
+}
+
+.speech-bubble {
+  position: relative;
+  background: $yellow;
+  border-radius: 0.4em;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 1.375em solid transparent;
+    border-right-color: $yellow;
+    border-left: 0;
+    border-bottom: 0;
+    margin-top: -0.687em;
+    margin-left: -1.375em;
+  }
+
+  @media screen and (max-width: 532px) {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border: 1.375em solid transparent;
+      border-bottom-color: $yellow;
+      border-top: 0;
+      border-left: 0;
+      margin-left: -0.687em;
+      margin-top: -1.375em;
     }
   }
 }

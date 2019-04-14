@@ -73,7 +73,7 @@ export class Ipsum extends Component {
                       <div className="col mb-3 px-3">
                         <Img fixed={file.childImageSharp.fixed} />
                       </div>
-                      <div className="col mb-3 align-self-center section-ipsum p-4">
+                      <div className="col my-3 align-self-center speech-bubble p-4">
                         {this.showForm()}
                       </div>
                     </div>
@@ -92,7 +92,7 @@ export class Ipsum extends Component {
       <form onSubmit={this.handleFormSubmit}>
         <i>
           Yes sir Miller&nbsp;! V'là un lorem ipsum à mon image&nbsp;!
-          Essayes-le&nbsp;!
+          Essayes-le&nbsp;! Rock on&nbsp;!
         </i>
         <div className="form-group pt-3">
           <label htmlFor="input-paragraph">Paragraphes</label>
@@ -121,8 +121,8 @@ export class Ipsum extends Component {
             Dalair seulement
           </label>
         </div>
-        <button type="submit" className="btn btn-primary mt-2">
-          Dalair Ipsum
+        <button type="submit" className="btn btn-secondary mt-2">
+          Générer
         </button>
       </form>
     )
