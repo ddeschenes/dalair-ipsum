@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import ReactDOMServer from 'react-dom/server'
 import { graphql, StaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
 import random from 'lodash/random'
@@ -27,6 +28,8 @@ export class Ipsum extends Component {
     this.handleParagraphChange = this.handleParagraphChange.bind(this)
     this.handleDalairOnlyChange = this.handleDalairOnlyChange.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+
+    new ClipboardJS('.btn')
   }
 
   handleParagraphChange(event) {
@@ -129,14 +132,27 @@ export class Ipsum extends Component {
   showIpsum() {
     return (
       (this.state.submitted && (
-        <div className="mt-3 mb-3">
-          {
-            (this.previous = this.ipsumGenerator.generate(
-              this.words,
-              this.state.nbParagraphes
-            ))
-          }
-        </div>
+        <Fragment>
+          <button className="btn" data-clipboard-target="#copy-ipsum">
+            Copier
+          </button>
+          <div id="section-ipsum" className="mt-3 mb-3">
+            {
+              (this.previous = this.ipsumGenerator.generate(
+                this.words,
+                this.state.nbParagraphes
+              ))
+            }
+          </div>
+          <textarea
+            id="copy-ipsum"
+            readOnly
+            value={decodeURI(ReactDOMServer.renderToStaticMarkup(this.previous))
+              .replace(/<\/p>/g, '/r/n')
+              .replace(/<[^>]*>/g, '')
+              .replace(/&#x27;/g, "'")}
+          />
+        </Fragment>
       )) || <div className="mt-3 mb-3">{this.previous}</div>
     )
   }
@@ -206,6 +222,15 @@ export class IpsumGenerator {
   chooseWord() {
     return this.words[random(0, this.words.length - 1)]
   }
+}
+
+export const copyToClipboard = str => {
+  const el = document.createElement('textarea')
+  el.value = str
+  document.body.appendChild(el)
+  el.select()
+  document.execCommand('copy')
+  document.body.removeChild(el)
 }
 
 export default Ipsum
