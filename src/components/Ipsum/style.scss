@@ -1,0 +1,98 @@
+@import 'scss/colors.scss';
+@import 'scss/fonts.scss';
+
+.btn-secondary {
+  background-color: $white;
+  color: $black;
+  &:hover {
+    background-color: $gray-100;
+    color: $black;
+  }
+}
+
+section {
+  min-height: calc(100vh - 9rem);
+  padding-top: 2rem;
+  .article {
+    padding: 0;
+    .gatsby-image-wrapper {
+      border-radius: 50%;
+      border: solid 2px $gray-600;
+      text-align: center;
+      display: block !important;
+      margin: 0 auto;
+    }
+  }
+
+  #section-ipsum {
+    position: relative;
+
+    &:hover {
+      .btn-clipboard {
+        opacity: 1;
+      }
+    }
+  }
+
+  .btn-clipboard {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    padding: 2px 6px;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+
+    &:hover {
+      opacity: 1;
+      text-decoration: none;
+      background-color: $gray-600;
+      background-image: linear-gradient($gray-200, $gray-600);
+      border-color: #ccc;
+    }
+
+    .clippy {
+      margin: -10px 0 0 0;
+      position: relative;
+      top: 3px;
+      padding: 0;
+    }
+  }
+}
+
+.speech-bubble {
+  position: relative;
+  background: $yellow;
+  border-radius: 0.4em;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 1.375em solid transparent;
+    border-right-color: $yellow;
+    border-left: 0;
+    border-bottom: 0;
+    margin-top: -0.687em;
+    margin-left: -1.375em;
+  }
+
+  @media screen and (max-width: 532px) {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border: 1.375em solid transparent;
+      border-bottom-color: $yellow;
+      border-top: 0;
+      border-left: 0;
+      margin-left: -0.687em;
+      margin-top: -1.375em;
+    }
+  }
+}
