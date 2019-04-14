@@ -231,8 +231,13 @@ export const ButtonClipboard = props => {
     <div>
       {document.queryCommandSupported('copy') && (
         <div>
-          <button className="btn-primary btn" onClick={copyToClipboard}>
-            Copier
+          <button className="btn btn-clipboard" onClick={copyToClipboard}>
+            <img
+              className="clippy"
+              width="13"
+              src="/img/clippy.svg"
+              alt="Copier"
+            />
           </button>
           {copySuccess}
         </div>

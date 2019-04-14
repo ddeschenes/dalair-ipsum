@@ -15,3 +15,27 @@
   border-radius: 5%;
   border: solid 2px $gray-600;
 }
+
+.btn-clipboard {
+  transition: opacity 0.3s ease-in-out;
+  //opacity: 0;
+  padding: 2px 6px;
+  //position: absolute;
+  right: 4px;
+  top: 4px;
+
+  &:hover {
+    //opacity: 1;
+    text-decoration: none;
+    background-color: #ffe600;
+    background-image: linear-gradient(#fae843, $yellow);
+    border-color: #ccc;
+  }
+
+  .clippy {
+    margin: -10px 0 0 0;
+    position: relative;
+    top: 3px;
+    padding: 0;
+  }
+}
