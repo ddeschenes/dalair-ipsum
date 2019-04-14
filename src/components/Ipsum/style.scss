@@ -16,16 +16,26 @@
   border: solid 2px $gray-600;
 }
 
+#section-ipsum {
+  position: relative;
+
+  &:hover {
+    .btn-clipboard {
+      opacity: 1;
+    }
+  }
+}
+
 .btn-clipboard {
   transition: opacity 0.3s ease-in-out;
-  //opacity: 0;
+  opacity: 0;
   padding: 2px 6px;
-  //position: absolute;
+  position: absolute;
   right: 4px;
   top: 4px;
 
   &:hover {
-    //opacity: 1;
+    opacity: 1;
     text-decoration: none;
     background-color: #ffe600;
     background-image: linear-gradient(#fae843, $yellow);

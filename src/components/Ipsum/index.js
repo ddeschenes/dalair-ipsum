@@ -130,7 +130,7 @@ export class Ipsum extends Component {
   showIpsum() {
     this.previous = this.state.submitted
       ? this.ipsumGenerator.generate(this.words, this.state.nbParagraphes)
-      : ''
+      : this.previous
     const ipsumToString = decodeURI(
       ReactDOMServer.renderToStaticMarkup(this.previous)
     )
@@ -138,14 +138,12 @@ export class Ipsum extends Component {
       .replace(/<[^>]*>/g, '')
       .replace(/&#x27;/g, "'")
     return (
-      (this.state.submitted && (
-        <Fragment>
+      <Fragment>
+        <div id="section-ipsum" className="mt-3 mb-3">
           <ButtonClipboard text={ipsumToString} />
-          <div id="section-ipsum" className="mt-3 mb-3">
-            {this.previous}
-          </div>
-        </Fragment>
-      )) || <div className="mt-3 mb-3">{this.previous}</div>
+          {this.previous}
+        </div>
+      </Fragment>
     )
   }
 }
@@ -228,19 +226,16 @@ export const ButtonClipboard = props => {
   }
 
   return (
-    <div>
+    <Fragment>
       {document.queryCommandSupported('copy') && (
-        <div>
-          <button className="btn btn-clipboard" onClick={copyToClipboard}>
-            <img
-              className="clippy"
-              width="13"
-              src="/img/clippy.svg"
-              alt="Copier"
-            />
-          </button>
-          {copySuccess}
-        </div>
+        <button className="btn btn-clipboard" onClick={copyToClipboard}>
+          <img
+            className="clippy"
+            width="13"
+            src="/img/clippy.svg"
+            alt="Copier"
+          />
+        </button>
       )}
       <textarea
         style={{
@@ -255,7 +250,7 @@ export const ButtonClipboard = props => {
         value={props.text}
         readOnly
       />
-    </div>
+    </Fragment>
   )
 }
 
