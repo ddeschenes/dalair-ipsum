@@ -17,7 +17,7 @@ const Footer = ({ author, title }) => (
               ddeschenes
             </a>
           </div>
-          <div>papa & fan de wknd radio 91.9 fm !</div>
+          <div>papa & fan de wknd radio 91.9 fm</div>
         </div>
       </div>
     </div>
