@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment, useState, useRef } from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { graphql, StaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
@@ -28,8 +28,6 @@ export class Ipsum extends Component {
     this.handleParagraphChange = this.handleParagraphChange.bind(this)
     this.handleDalairOnlyChange = this.handleDalairOnlyChange.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
-
-    new ClipboardJS('.btn')
   }
 
   handleParagraphChange(event) {
@@ -130,28 +128,22 @@ export class Ipsum extends Component {
     )
   }
   showIpsum() {
+    this.previous = this.state.submitted
+      ? this.ipsumGenerator.generate(this.words, this.state.nbParagraphes)
+      : ''
+    const ipsumToString = decodeURI(
+      ReactDOMServer.renderToStaticMarkup(this.previous)
+    )
+      .replace(/<\/p>/g, '\n\n')
+      .replace(/<[^>]*>/g, '')
+      .replace(/&#x27;/g, "'")
     return (
       (this.state.submitted && (
         <Fragment>
-          <button className="btn" data-clipboard-target="#copy-ipsum">
-            Copier
-          </button>
+          <ButtonClipboard text={ipsumToString} />
           <div id="section-ipsum" className="mt-3 mb-3">
-            {
-              (this.previous = this.ipsumGenerator.generate(
-                this.words,
-                this.state.nbParagraphes
-              ))
-            }
+            {this.previous}
           </div>
-          <textarea
-            id="copy-ipsum"
-            readOnly
-            value={decodeURI(ReactDOMServer.renderToStaticMarkup(this.previous))
-              .replace(/<\/p>/g, '/r/n')
-              .replace(/<[^>]*>/g, '')
-              .replace(/&#x27;/g, "'")}
-          />
         </Fragment>
       )) || <div className="mt-3 mb-3">{this.previous}</div>
     )
@@ -224,13 +216,42 @@ export class IpsumGenerator {
   }
 }
 
-export const copyToClipboard = str => {
-  const el = document.createElement('textarea')
-  el.value = str
-  document.body.appendChild(el)
-  el.select()
-  document.execCommand('copy')
-  document.body.removeChild(el)
+export const ButtonClipboard = props => {
+  const [copySuccess, setCopySuccess] = useState('')
+  const textAreaRef = useRef(null)
+
+  function copyToClipboard(e) {
+    textAreaRef.current.select()
+    document.execCommand('copy')
+    e.target.focus()
+    setCopySuccess('Copié!')
+  }
+
+  return (
+    <div>
+      {document.queryCommandSupported('copy') && (
+        <div>
+          <button className="btn-primary btn" onClick={copyToClipboard}>
+            Copier
+          </button>
+          {copySuccess}
+        </div>
+      )}
+      <textarea
+        style={{
+          width: 0,
+          height: 0,
+          padding: 0,
+          margin: 0,
+          left: -99999,
+          position: 'absolute',
+        }}
+        ref={textAreaRef}
+        value={props.text}
+        readOnly
+      />
+    </div>
+  )
 }
 
 export default Ipsum
