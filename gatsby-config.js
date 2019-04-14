@@ -59,7 +59,7 @@ module.exports = {
       options: {
         name: 'Dalair Ipsum',
         short_name: 'Dalair Ipsum',
-        description: 'Du lorem ipsum, sauce Martin Dalair',
+        description: 'Lorem Ipsum et Martin Dalair',
         homepage_url: 'https://www.dalairipsum.ca',
         start_url: '/',
         background_color: '#fff',
@@ -85,21 +85,12 @@ module.exports = {
         trackingId: '',
       },
     },
-    {
-      resolve: 'gatsby-plugin-netlify',
-      options: {
-        mergeSecurityHeaders: true,
-        mergeLinkHeaders: true,
-        mergeCachingHeaders: true,
-      },
-    },
     'gatsby-plugin-catch-links',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-react-next',
     'gatsby-plugin-sass',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-twitter',
     'gatsby-transformer-sharp',
   ],
 }

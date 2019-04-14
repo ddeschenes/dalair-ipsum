@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-bootstrap",
-  "description": "Simple starter for Gatsby",
+  "name": "dalair-ipsum",
+  "description": "Lorem Ipsum generator from Martin Dalair best quotes",
   "version": "2.0.1",
-  "author": "Futoshi Iwashita <jaxx2104@gmail.com>",
+  "author": "Daniel Deschenes <ddeschenes@voonyx.com>",
   "dependencies": {
     "gatsby": "2.3.16",
     "gatsby-image": "2.0.37",
@@ -11,7 +11,6 @@
     "gatsby-plugin-feed": "2.1.0",
     "gatsby-plugin-google-analytics": "2.0.18",
     "gatsby-plugin-manifest": "2.0.28",
-    "gatsby-plugin-netlify": "2.0.13",
     "gatsby-plugin-nprogress": "2.0.10",
     "gatsby-plugin-offline": "2.0.25",
     "gatsby-plugin-preact": "2.0.11",
@@ -20,7 +19,6 @@
     "gatsby-plugin-sass": "^2.0.0-rc.2",
     "gatsby-plugin-sharp": "2.0.33",
     "gatsby-plugin-sitemap": "2.0.12",
-    "gatsby-plugin-twitter": "2.0.13",
     "gatsby-remark-copy-linked-files": "2.0.11",
     "gatsby-remark-images": "3.0.10",
     "gatsby-remark-prismjs": "3.2.8",
@@ -61,9 +59,9 @@
     "textlint-rule-preset-japanese": "4.0.2"
   },
   "keywords": [
-    "gatsby",
-    "gatstrap",
-    "starter"
+    "martin dalair",
+    "wknd",
+    "lorem ipsum"
   ],
   "license": "MIT",
   "lint-staged": {
