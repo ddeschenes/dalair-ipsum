@@ -3,7 +3,9 @@
 
 section {
   min-height: calc(100vh - 9rem);
+  padding-top: 2rem;
   .article {
+    padding: 0;
     .gatsby-image-wrapper {
       border-radius: 50%;
       border: solid 2px $gray-600;
