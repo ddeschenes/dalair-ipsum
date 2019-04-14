@@ -5,23 +5,14 @@ import get from 'lodash/get'
 import Meta from 'components/Meta'
 import Layout from 'components/Layout'
 import Ipsum from 'components/Ipsum'
-import Post from 'templates/Post'
+import Footer from 'components/Footer'
 
 const BlogIndex = ({ data, location }) => {
-  const posts = [] //get(data, 'remark.posts')
   return (
     <Layout location={location}>
       <Meta site={get(data, 'site.meta')} />
       <Ipsum />
-      {posts.map(({ post }, i) => (
-        <Post
-          data={post}
-          options={{
-            isIndex: true,
-          }}
-          key={i}
-        />
-      ))}
+      <Footer />
     </Layout>
   )
 }

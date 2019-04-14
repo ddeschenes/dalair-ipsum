@@ -59,7 +59,7 @@ export class Ipsum extends Component {
             ? this.customWords.slice()
             : this.customWords.concat(this.baseWords)
           return (
-            <div>
+            <section>
               <div className="article">
                 <div className="container">
                   <div className="info">
@@ -81,7 +81,7 @@ export class Ipsum extends Component {
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
           )
         }}
       />

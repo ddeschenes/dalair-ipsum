@@ -1,9 +1,5 @@
 @import 'scss/colors.scss';
 
-.footer {
-  hr {
-    border-color: $red;
-    border-width: 3px;
-    max-width: 50px;
-  }
+footer {
+  background-color: $black;
 }
