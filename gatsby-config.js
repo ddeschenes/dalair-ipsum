@@ -63,7 +63,7 @@ module.exports = {
         homepage_url: 'https://www.dalairipsum.ca',
         start_url: '/',
         background_color: '#fff',
-        theme_color: '#673ab7',
+        theme_color: '#ffe600',
         display: 'standalone',
         icons: [
           {
