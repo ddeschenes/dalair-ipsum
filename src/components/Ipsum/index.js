@@ -65,15 +65,15 @@ export class Ipsum extends Component {
                   <div className="info">
                     <h2>
                       Mets du Dalair dans ton lorem ipsum et essayes le
-                      générateur !
+                      générateur&nbsp;!
                     </h2>
                   </div>
                   <div className="content">
                     <div className="row mx-auto">
-                      <div className="col m-3 p-0">
+                      <div className="col-md m-3 p-0">
                         <Img fixed={file.childImageSharp.fixed} />
                       </div>
-                      <div className="col speech-bubble m-3 p-4">
+                      <div className="col-md speech-bubble m-3 p-4">
                         {this.showForm()}
                       </div>
                     </div>
