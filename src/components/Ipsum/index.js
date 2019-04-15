@@ -22,7 +22,7 @@ export class Ipsum extends Component {
       dalairOnly: true,
       nbParagraphes: 5,
       submitted: false,
-      previous: <div />,
+      previous: '',
     }
 
     this.handleParagraphChange = this.handleParagraphChange.bind(this)
@@ -70,10 +70,10 @@ export class Ipsum extends Component {
                   </div>
                   <div className="content">
                     <div className="row mx-auto">
-                      <div className="col mb-3 px-3">
+                      <div className="col m-3 p-0">
                         <Img fixed={file.childImageSharp.fixed} />
                       </div>
-                      <div className="col my-3 align-self-center speech-bubble p-4">
+                      <div className="col speech-bubble m-3 p-4">
                         {this.showForm()}
                       </div>
                     </div>
@@ -131,20 +131,23 @@ export class Ipsum extends Component {
     this.previous = this.state.submitted
       ? this.ipsumGenerator.generate(this.words, this.state.nbParagraphes)
       : this.previous
-    const ipsumToString = decodeURI(
-      ReactDOMServer.renderToStaticMarkup(this.previous)
+    const ipsumToString = this.getStringFromDOM(this.previous)
+    return (
+      this.previous && (
+        <Fragment>
+          <div id="section-ipsum" className="mt-3 mb-3">
+            <ButtonClipboard text={ipsumToString} />
+            {this.previous}
+          </div>
+        </Fragment>
+      )
     )
+  }
+  getStringFromDOM(element) {
+    return decodeURI(ReactDOMServer.renderToStaticMarkup(element))
       .replace(/<\/p>/g, '\n\n')
       .replace(/<[^>]*>/g, '')
       .replace(/&#x27;/g, "'")
-    return (
-      <Fragment>
-        <div id="section-ipsum" className="mt-3 mb-3">
-          <ButtonClipboard text={ipsumToString} />
-          {this.previous}
-        </div>
-      </Fragment>
-    )
   }
 }
 
@@ -206,7 +209,7 @@ export class IpsumGenerator {
       }
       paragraphes.push(<p key={i}>{sentences}</p>)
     }
-    return <blockquote>{paragraphes}</blockquote>
+    return <blockquote className="pt-3">{paragraphes}</blockquote>
   }
 
   chooseWord() {
