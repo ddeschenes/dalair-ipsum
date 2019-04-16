@@ -69,16 +69,18 @@ export class Ipsum extends Component {
                     </h2>
                   </div>
                   <div className="content">
-                    <div className="row mx-auto">
+                    <div className="row justify-content-center">
                       <div className="col-md m-3 p-0">
                         <Img fixed={file.childImageSharp.fixed} />
                       </div>
+
                       <div className="col-md speech-bubble m-3 p-4">
                         {this.showForm()}
                       </div>
                     </div>
                     {this.showIpsum()}
                   </div>
+                  <div className="w-100" />
                 </div>
               </div>
             </section>
