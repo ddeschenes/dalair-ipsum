@@ -9,11 +9,6 @@ const Meta = ({ site, title }) => {
     <Helmet
       title={title}
       meta={[
-        { name: 'twitter:card', content: 'summary' },
-        {
-          name: 'twitter:site',
-          content: `@${get(site, 'twitter')}`,
-        },
         { property: 'og:title', content: title },
         { property: 'og:type', content: 'website' },
         {
@@ -22,11 +17,11 @@ const Meta = ({ site, title }) => {
         },
         {
           property: 'og:url',
-          content: `${get(site, 'siteUrl')}/profile`,
+          content: `${get(site, 'url')}`,
         },
         {
           property: 'og:image',
-          content: `${get(site, 'siteUrl')}/img/profile.jpg`,
+          content: `${get(site, 'url')}/img/android-chrome-192x192.png`,
         },
       ]}
     />
